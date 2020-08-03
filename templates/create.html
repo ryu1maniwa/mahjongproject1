@@ -1,0 +1,39 @@
+{%  extends 'base.html' %}
+
+{% block content %}
+<div class = 'container'>
+    {% if user.is_authenticated %}
+        <p><a href="{% url 'top' %}" class="btn-lg btn-light" tabindex="-1" role="button" aria-disabled="true">戻る</a></p>
+        <form action = "" method = "POST">{% csrf_token %}
+        <h3>得点・順位を入力してください</h3>
+            <p>
+                {% for item in player_list %}
+                    {{ item.player1 }}:
+                    {{ form.score1 }}
+                    {{ form.rank1 }}
+                </p>
+                <p>
+                    {{ item.player2 }}:
+                    {{ form.score2 }}
+                    {{ form.rank2 }}
+                </p>
+                <p>
+                    {{ item.player3 }}:
+                    {{ form.score3 }}
+                    {{ form.rank3 }}
+                </p>
+                <p>
+                    {{ item.player4 }}:
+                    {{ form.score4 }}
+                    {{ form.rank4 }}
+                    <input type='hidden' name='username' value='{{ request.user.username }}'>
+                </p>
+                {% endfor %}
+            <input type = "submit" value = "保存する">
+        </form>
+    {% else %}
+    <h1>ログインしてください</h1>
+    <p><a href="{% url 'login' %}">ログインする</a></p>
+    {% endif %}
+</div>
+{% endblock content %}

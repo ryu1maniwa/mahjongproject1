@@ -1,0 +1,15 @@
+{%  extends 'base.html' %}
+
+{% block content %}
+<div class = 'container'>
+    {% if user.is_authenticated %}
+    <p><a href="{% url 'scores' %}" class="btn-lg btn-light" tabindex="-1" role="button" aria-disabled="true">戻る</a></p>
+    <form action = "" method = "POST">{% csrf_token %}
+        <input type = "submit" value = "削除する">
+    </form>
+    {% else %}
+    <h1>ログインしてください</h1>
+    <p><a href="{% url 'login' %}">ログインする</a></p>
+    {% endif %}
+</div>
+{% endblock content %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class = 'container'>
+    {% if user.is_authenticated %}
+    <p><a href="{% url 'top' %}" class="btn-lg btn-light" tabindex="-1" role="button" aria-disabled="true">戻る</a></p>
+    {% for item in object_list %}
+    <p>
+        
+        <a href="{% url 'update' item.pk  %}" class="btn-lg btn-light" tabindex="-1" role="button" aria-disabled="true">確認・編集画面</a>
+        <a href="{% url 'delete' item.pk  %}" class="btn-lg btn-light" tabindex="-1" role="button" aria-disabled="true">削除画面</a>
+    </p>
+    {% endfor %}
+    {% else %}
+    <h1>ログインしてください</h1>
+    <p><a href="{% url 'login' %}">ログインする</a></p>
+    {% endif %}
+</div>
+{% endblock content %}

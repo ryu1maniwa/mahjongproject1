@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% if user.is_authenticated %}
+{% block header %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">麻雀スコアシート自動作成サイト</h1>
+      <p class="lead">各プレイヤーの得点を入力すると、設定したウマ・オカに応じたスコアを自動で計算し、スコア表に記録します。</p>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+<div class = 'container'>
+    <p><a href="{% url 'scores' %}" class="btn-lg btn-light" tabindex="-1" role="button" aria-disabled="true">スコア表</a></p>
+    <p><a href="{% url 'player_create' %}" class="btn-lg btn-light" tabindex="-1" role="button" aria-disabled="true">プレイヤー登録</a></p>
+    <p><a href="{% url 'set' %}" class="btn-lg btn-light" tabindex="-1" role="button" aria-disabled="true">ウマ・オカの設定</a></p>
+    <p><a href="{% url 'caution' %}" class="btn-lg btn-light" tabindex="-1" role="button" aria-disabled="true">得点・順位の新規登録</a></p>
+    <p></p>
+    <p><a href="{% url 'logout' %}" class="btn-lg btn-light" tabindex="-1" role="button" aria-disabled="true">ログアウト</a>
+    (ユーザ名: {{ request.user.username }} でログイン中)</p>
+</div>
+{% endblock content %}
+{% else %}
+<h1>ログインしてください</h1>
+{% endif %}

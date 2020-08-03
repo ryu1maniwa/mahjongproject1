@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class = 'container'>
+    {% if user.is_authenticated %}
+    <h3>プレイヤー登録とウマ・オカの設定をしてから得点・順位の新規登録をしてください。</h3>
+    <p><a href="{% url 'top' %}" class="btn-lg btn-light" tabindex="-1" role="button" aria-disabled="true">戻る</a></p>
+    {% else %}
+    <h1>ログインしてください</h1>
+    <p><a href="{% url 'login' %}">ログインする</a></p>
+    {% endif %}
+</div>
+{% endblock content %}

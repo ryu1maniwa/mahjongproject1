@@ -1,0 +1,28 @@
+{%  extends 'base.html' %}
+
+{% block content %}
+<div class = 'container'>
+    {% if user.is_authenticated %}
+    <p><a href="{% url 'top' %}" class="btn-lg btn-light" tabindex="-1" role="button" aria-disabled="true">戻る</a></p>
+    <form action = "" method = "POST">{% csrf_token %}
+        <p><h3>ウマ・オカを設定してください</h3></p>
+        <p>
+            ウマ:<select name='uma' required autofocus>
+            <option value='なし' selected="selected">なし</option>
+            <option value='5-10'>5-10</option>
+            <option value='5-15'>5-15</option>
+            <option value='10-20'>10-20</option>
+            <option value='10-30'>10-30</option>
+            <option value='20-30'>20-30</option>
+            </select>
+        </p>
+        <p>
+            オカ:<input type="number" name='oka' value = 25000 required autofocus>点で返す</p>
+        <input type = "submit" value = "保存する">
+    </form>
+    {% else %}
+    <h1>ログインしてください</h1>
+    <p><a href="{% url 'login' %}">ログインする</a></p>
+    {% endif %}
+</div>
+{% endblock content %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class = 'container'>
+    {% if user.is_authenticated %}
+    <h1>スコアをリセットしますか？</h1>
+    <p><a href="{% url 'scores' %}" class="btn-lg btn-light" tabindex="-1" role="button" aria-disabled="true">戻る</a></p>
+    <p><a href="{% url 'scores_delete' %}" class="btn-lg btn-light" tabindex="-1" role="button" aria-disabled="true">スコアをリセットする</a></p>
+    {% else %}
+    <h1>ログインしてください</h1>
+    <p><a href="{% url 'login' %}">ログインする</a></p>
+    {% endif %}
+</div>
+{% endblock content %}

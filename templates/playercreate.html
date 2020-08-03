@@ -1,0 +1,24 @@
+{%  extends 'base.html' %}
+
+{% block content %}
+<div class = 'container'>
+    {% if user.is_authenticated %}
+    <p><a href="{% url 'top' %}" class="btn-lg btn-light" tabindex="-1" role="button" aria-disabled="true">戻る</a></p>
+    <form method="POST" action=''>{% csrf_token %}
+        <h3>playerを入力してください</h3>
+        <label for="player1" class="sr-only">player1</label>
+        <p><input type="text" name='player1' placeholder="player1" required autofocus></p>
+        <label for="player2" class="sr-only">player1</label>
+        <p><input type="text" name='player2' placeholder="player2" required autofocus></p>
+        <label for="player3" class="sr-only">player1</label>
+        <p><input type="text" name='player3' placeholder="player3" required autofocus></p>
+        <label for="player4" class="sr-only">player1</label>
+        <p><input type="text" name='player4' placeholder="player4" required autofocus></p>
+        <p><button class="btn-primary" type="submit">保存する</button></p>
+    </form>
+    {% else %}
+    <h1>ログインしてください</h1>
+    <p><a href="{% url 'login' %}">ログインする</a></p>
+    {% endif %}
+</div>
+{% endblock content %}
