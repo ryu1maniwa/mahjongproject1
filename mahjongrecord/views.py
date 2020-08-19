@@ -47,7 +47,7 @@ class MahjongRecordTop(ListView):
 @login_required
 def scoresfunc(request):
     players = MahjongPlayerModel.objects.filter(username = request.user.username)
-    object_list = MahjongRecordModel.objects.filter(username = request.user.username)
+    object_list = MahjongRecordModel.objects.filter(username = request.user.username).order_by('pk')
     sum_player1 = MahjongRecordModel.objects.filter(username = request.user.username).aggregate(Sum('calculatedscore1'))
     sum_player2 = MahjongRecordModel.objects.filter(username = request.user.username).aggregate(Sum('calculatedscore2'))
     sum_player3 = MahjongRecordModel.objects.filter(username = request.user.username).aggregate(Sum('calculatedscore3'))
@@ -107,7 +107,7 @@ class MahjongRecordDelete(DeleteView):
     model = MahjongRecordModel
     success_url = reverse_lazy('scores')
 
-#グローバル変数
+
 class MahjongRecordUpdate(UpdateView):
     template_name = 'update.html'
     model = MahjongRecordModel
@@ -181,10 +181,12 @@ def scorecalculatefunc(request, pk):
     rank2 = object_list.rank2
     rank3 = object_list.rank3
     rank4 = object_list.rank4
-    object_list.calculatedscore1 = round(scorecalculate(request.user.username, rank1, score1)-0.1)
-    object_list.calculatedscore2 = round(scorecalculate(request.user.username, rank2, score2)-0.1)
-    object_list.calculatedscore3 = round(scorecalculate(request.user.username, rank3, score3)-0.1)
-    object_list.calculatedscore4 = round(scorecalculate(request.user.username, rank4, score4)-0.1)
+
+    round56=lambda x:((x-0.1)*2+1)//2
+    object_list.calculatedscore1 = round56(scorecalculate(request.user.username, rank1, score1))
+    object_list.calculatedscore2 = round56(scorecalculate(request.user.username, rank2, score2))
+    object_list.calculatedscore3 = round56(scorecalculate(request.user.username, rank3, score3))
+    object_list.calculatedscore4 = round56(scorecalculate(request.user.username, rank4, score4))
     object_list.save()
 
     if rank1 == '1st':
